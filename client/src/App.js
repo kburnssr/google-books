@@ -7,7 +7,6 @@ import Header from "./components/Header"
 
 const App = () => 
     (
-
         <div>
             <BrowserRouter>
                 <div className="container">

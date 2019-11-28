@@ -50,7 +50,7 @@ class Home extends Component {
             },
             method: "POST",
             body: JSON.stringify({ saved_book })
-        })
+        }) .then(result => console.log(result))
 }
 
     takeBook = () => {
@@ -60,10 +60,7 @@ class Home extends Component {
          })
             .then(r => r.json())
             .then(r => {
-                console.log("book", typeof book, book);
-                console.log("r", typeof r);
-                let items = r.items;
-                console.log("items", items);
+                 let items = r.items;
                 this.setState({ items }, () => {
                 })
             })

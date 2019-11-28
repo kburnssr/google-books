@@ -64,22 +64,34 @@ app.post("/saveBook", (req, res) => {
             let authors = saved_book.authors;
             let price = saved_book.price;
             let link = saved_book.link;
-            let id = saved_book.id
-            db.books.update(
-                { id },
-                { $set: { title, img, description, authors, price, link, id } },
-                { upsert: true },
+//            let id = saved_book.id
+            db.collection("books").update(
+//                { id },
+                { title, img, description, authors, price, link },
+//                { upsert: true },
+                function(error,doc){
+                    if(error){
+                        console.log(error)
+                    }
+                    console.log(doc)
+                }
             );
         } else {
             let title = saved_book.title;
             let img = saved_book.img;
             let description = saved_book.description;
-            let id = saved_book.id
+//            let id = saved_book.id
             let authors = saved_book.authors;
-            db.books.update(
-                { id },
-                { $set: { title, img, description, authors, id } },
-                { upsert: true },
+            db.collection("books").update(
+//               { id },
+                { title, img, description, authors },
+//                { upsert: true },
+                function(error,doc){
+                    if(error){
+                        console.log(error)
+                    }
+                    console.log(doc)
+                }
             );
         }
     } else {
@@ -90,7 +102,7 @@ app.post("/saveBook", (req, res) => {
 })
 
 app.get("/getBooks", function (req, res) {
-    db.books.find({}, function (books, error) {
+    db.collection("books").find(function (error, books) {
         if (error) {
             res.send(error)
         } else {
@@ -102,7 +114,7 @@ app.get("/getBooks", function (req, res) {
 app.post("/deleteBook", (req, res) => {
     let id = req.body.id
     console.log(id)
-    db.books.remove({
+    db.collection("books").remove({
         "_id": mongojs.ObjectID(id)
     }, function (error, removed) {
         if (error) {
