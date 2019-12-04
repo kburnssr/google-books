@@ -8,7 +8,7 @@ var path = require("path");
 // set the app up with bodyparser
 app.use(bodyParser());
 // Database configuration
-var databaseUrl = process.env.MONGODB_URI || "books_db";
+var databaseUrl = process.env.MONGODB_URI || "bookto_db";
 var collections = ["books"];
 // Hook mongojs config to db variable
 var db = mongojs(databaseUrl, collections);
